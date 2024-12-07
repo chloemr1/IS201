@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(10, 135, 124);
+    padding: 20px;
+    margin-left:75px;
+}
+h1 {
+    color: white;
+    font-weight: bold;
+}
+
+h2 {
+    color: white;
+    font-style: italic;
+}
+.professionalpagelink {
+    color: rgba(255, 255, 255, 0.671);
+}
+
+.tableauPlaceholder {
+    width: 560px;
+    height: 315px;
+
+}
+
+.imageborder {
+    border: 5px black;
+}
+
+.pollutionimage {
+    border: 5px solid white; /* Visible border */
+    width: 560px; /* Fixed width */
+    height: 315px; /* Fixed height */
+    display: flex; /* Flexbox for alignment */
+    justify-content: center; /* Horizontal alignment */
+    align-items: center; /* Vertical alignment */
+    overflow: hidden; /* Ensures image doesn't overflow the container */
+}
+
+.pollutionimage img {
+    width: 100%; /* Make the image fill the container's width */
+    height: 100%; /* Make the image fill the container's height */
+    object-fit: cover; /* Ensures the image is cropped proportionally to fill the space */
+}
+
+
+
+.list {
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.tableau-container {
+    display: flex; /* Add this to make it a flex container */
+    /* justify-content: center; Centers horizontally */
+    /* align-items: center; Centers vertically */
+    /*height: 50px; /*Full viewport height */
+}

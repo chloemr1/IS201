@@ -1,0 +1,36 @@
+h2 {
+    font-size:medium !important;
+
+}
+ol, ul {
+    list-style: initial; /* Restore default styles */
+    padding-left: 20px; /* Ensure proper spacing */
+    text-align: left; /* Ensures both ordered and unordered lists are aligned left */
+    color: white !important;
+}
+ol {
+    list-style-type: decimal; /* Ensures numbers appear */
+    margin-left: 20px; /* Optional: Adds indentation */
+    padding-left: 20px; /* Optional: Adds padding for clarity */
+    color: white !important;
+}
+
+li {
+    display: list-item; /* Ensures proper list item display */
+    color: white !important;
+}
+
+.swimlogoimage {
+    Display: block; 
+    margin: 0 auto;
+}
+h3 {
+    font-style: italic;
+    font-size: medium;
+}
+div.experiencelist ul li {
+    color: rgb(44, 44, 44) !important;
+}
+.experiencebold {
+    font-weight: bold;
+}

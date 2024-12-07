@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .choices {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #444;
+            border-radius: 5px;
+            background-color: #fff;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        button img.choice-image {
+            width: 150px; /* Increased size for the player choice */
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .vs {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff6347;
+            margin: 20px 0;
+        }
+
+        .score {
+            margin-top: 30px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .computer-choice,
+        .player-choice {
+            display: inline-block;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .computer-choice img,
+        .player-choice img {
+            width: 150px; /* Match the size of the player's choice */
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .play-again-btn {
+            display: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            border: none;
+            width: 200px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%); /* Center the button */
+        }
+
+        /* Highlight winning choice */
+        .highlight {
+            border: 4px solid #32cd32; /* Green border for winning choice */
+            background-color: #e0ffe0;  /* Light green background */
+        }
+
+        /* Highlight losing choice */
+        .loser {
+            border: 4px solid #ff6347; /* Red border for losing choice */
+            background-color: #ffe0e0; /* Light red background */
+        }
+
+        .winner-description {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Style the result display to be horizontally aligned */
+        .result-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .choice-box {
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body onload="initializeGame()">
+
+  <a href = "../index.html">Professional Page |</a> 
+  <a href="../html/scratch.html">Website From Scratch</a>
+
+    <h1>Rock, Paper, Scissors</h1>
+    <p class="instructions" id="instructions">Choose your option below to start the game!</p>
+
+    <div class="choices" id="choices">
+        <button onclick="playGame('rock')">
+            <img src="../images/rock-rockpaperscissorsgame.PNG" alt="Rock" class="choice-image">
+        </button>
+        <button onclick="playGame('paper')">
+            <img src="../images/paper-rockpaperscissorsgame.PNG" alt="Paper" class="choice-image">
+        </button>
+        <button onclick="playGame('scissors')">
+            <img src="../images/scissors-rockpaperscissorsgame.png" alt="Scissors" class="choice-image">
+        </button>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <div class="choice-box player-choice" id="playerChoice">
+            <p>Your Choice:</p>
+            <img id="playerImage" src="" alt="Player's choice">
+            <p id="playerText"></p>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="choice-box computer-choice" id="computerChoice">
+            <p>Computer's Choice:</p>
+            <img id="computerImage" src="" alt="Computer's choice">
+            <p id="computerText"></p>
+        </div>
+    </div>
+
+    <p class="winner-description" id="winnerDescription"></p>
+
+    <div class="score" id="score">Player: 0 | Computer: 0</div>
+
+    <button class="play-again-btn" id="playAgainBtn" onclick="resetGame()">Play Again</button>
+
+    <script>
+        // Variables to store scores
+        let playerScore = 0;
+        let computerScore = 0;
+
+        // Function to play the game
+        function playGame(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            // Hide instructions after the game starts
+            document.getElementById('instructions').style.display = 'none';
+
+            // Set the player's choice image and text
+            const playerImage = document.getElementById('playerImage');
+            const playerText = document.getElementById('playerText');
+            playerImage.src = `../images/${playerChoice}-rockpaperscissorsgame.PNG`;
+            playerText.textContent = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
+
+            // Set the computer's choice image and text
+            const computerImage = document.getElementById('computerImage');
+            const computerText = document.getElementById('computerText');
+            computerImage.src = `../images/${computerChoice}-rockpaperscissorsgame.PNG`;
+            computerText.textContent = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+
+            // Hide the choices and display the result section
+            document.getElementById('choices').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'flex';
+
+            // Determine the result
+            let resultMessage = '';
+            let playerWon = false;
+            if (playerChoice === computerChoice) {
+                resultMessage = `It's a tie! Both chose ${capitalize(playerChoice)}.`;
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                resultMessage = `You win! ${capitalize(playerChoice)} beats ${capitalize(computerChoice)}.`;
+                playerScore++;
+                playerWon = true;
+            } else {
+                resultMessage = `You lose! ${capitalize(computerChoice)} beats ${capitalize(playerChoice)}.`;
+                computerScore++;
+            }
+
+            // Update the result and score
+            document.getElementById('score').textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
+            document.getElementById('winnerDescription').textContent = resultMessage;
+
+            // Highlight the winning choice
+            const playerChoiceDiv = document.getElementById('playerChoice');
+            const computerChoiceDiv = document.getElementById('computerChoice');
+            
+            if (playerWon) {
+                playerChoiceDiv.classList.add('highlight');
+                computerChoiceDiv.classList.add('loser');
+            } else {
+                computerChoiceDiv.classList.add('highlight');
+                playerChoiceDiv.classList.add('loser');
+            }
+
+            // Show the play again button
+            document.getElementById('playAgainBtn').style.display = 'block';
+        }
+
+        // Reset the game to the initial state
+        function resetGame() {
+            // Hide result and play again button, show choices and instructions again
+            document.getElementById('resultContainer').style.display = 'none';
+            document.getElementById('playAgainBtn').style.display = 'none';
+            document.getElementById('instructions').style.display = 'block';
+            document.getElementById('choices').style.display = 'flex';
+            
+            // Clear previous choices and winner message
+            document.getElementById('playerImage').src = '';
+            document.getElementById('computerImage').src = '';
+            document.getElementById('playerText').textContent = '';
+            document.getElementById('computerText').textContent = '';
+            document.getElementById('winnerDescription').textContent = '';
+
+            // Remove highlights from previous selections
+            document.getElementById('playerChoice').classList.remove('highlight', 'loser');
+            document.getElementById('computerChoice').classList.remove('highlight', 'loser');
+        }
+
+        // Capitalize first letter for better result description
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Initialize the game
+        function initializeGame() {
+            resetGame(); // Set the initial state when the page is loaded or refreshed
+        }
+    </script>
+</body>
+</html>
